@@ -10,7 +10,7 @@
 namespace BearFramework {
 
     /**
-     * @property-read \IvoPetkov\BearFramework\Addons\DataBundles $dataBundles
+     * @property-read \IvoPetkov\BearFramework\Addons\DataBundle $dataBundle
      */
     class App
     {

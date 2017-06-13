@@ -8,16 +8,16 @@
  */
 
 use \BearFramework\App;
-use IvoPetkov\BearFramework\Addons\DataBundles;
+use IvoPetkov\BearFramework\Addons\DataBundle;
 
 $app = App::get();
 $context = $app->context->get(__FILE__);
 
 $context->classes
-        ->add('\IvoPetkov\BearFramework\Addons\DataBundles', 'src/DataBundles.php')
-        ->add('\IvoPetkov\BearFramework\Addons\DataBundle\AlreadyExistsException', 'src/DataBundles/AlreadyExistsException.php')
-        ->add('\IvoPetkov\BearFramework\Addons\DataBundle\NotFoundException', 'src/DataBundles/NotFoundException.php');
+        ->add('\IvoPetkov\BearFramework\Addons\DataBundle', 'src/DataBundle.php')
+        ->add('\IvoPetkov\BearFramework\Addons\DataBundle\AlreadyExistsException', 'src/DataBundle/AlreadyExistsException.php')
+        ->add('\IvoPetkov\BearFramework\Addons\DataBundle\NotFoundException', 'src/DataBundle/NotFoundException.php');
 
-$app->shortcuts->add('dataBundles', function() {
-    return new DataBundles();
+$app->shortcuts->add('DataBundle', function() {
+    return new DataBundle();
 });

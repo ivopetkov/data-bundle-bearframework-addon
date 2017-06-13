@@ -20,7 +20,7 @@ class ComponentsTest extends BearFrameworkAddonTestCase
     {
         $app = $this->getApp();
 
-        $list = $app->dataBundles->getItemsList('test1');
+        $list = $app->dataBundle->getItemsList('test1');
         $this->assertTrue($list->length === 0);
 
         $item = $app->data->make('example/1.json', '1');
@@ -29,15 +29,15 @@ class ComponentsTest extends BearFrameworkAddonTestCase
         $app->data->set($app->data->make('example/2.json', '2'));
         $app->data->set($app->data->make('example/3.json', '3'));
 
-        $app->dataBundles->create('test1', [
+        $app->dataBundle->create('test1', [
             'example/1.json',
             'example/2.json'
         ]);
 
-        $app->dataBundles->addItem('test1', 'example/3.json');
-        $app->dataBundles->addItem('test1', 'example/4.json');
+        $app->dataBundle->addItem('test1', 'example/3.json');
+        $app->dataBundle->addItem('test1', 'example/4.json');
 
-        $list = $app->dataBundles->getItemsList('test1');
+        $list = $app->dataBundle->getItemsList('test1');
         $this->assertTrue($list->length === 3);
         $this->assertTrue($list[0]->key === 'example/1.json');
         $this->assertTrue($list[0]->value === '1');
@@ -49,14 +49,14 @@ class ComponentsTest extends BearFrameworkAddonTestCase
 
         $app->data->set($app->data->make('example/2.json', '22'));
 
-        $list = $app->dataBundles->getItemsList('test1');
+        $list = $app->dataBundle->getItemsList('test1');
         $this->assertTrue($list->length === 3);
         $this->assertTrue($list[1]->key === 'example/2.json');
         $this->assertTrue($list[1]->value === '2');
 
-        $app->dataBundles->updateItem('test1', 'example/2.json');
+        $app->dataBundle->updateItem('test1', 'example/2.json');
 
-        $list = $app->dataBundles->getItemsList('test1');
+        $list = $app->dataBundle->getItemsList('test1');
         $this->assertTrue($list->length === 3);
         $this->assertTrue($list[0]->key === 'example/1.json');
         $this->assertTrue($list[0]->value === '1');
@@ -67,8 +67,8 @@ class ComponentsTest extends BearFrameworkAddonTestCase
         $this->assertTrue($list[2]->value === '3');
 
 
-        $app->dataBundles->removeItem('test1', 'example/2.json');
-        $list = $app->dataBundles->getItemsList('test1');
+        $app->dataBundle->removeItem('test1', 'example/2.json');
+        $list = $app->dataBundle->getItemsList('test1');
         $this->assertTrue($list->length === 2);
         $this->assertTrue($list[0]->key === 'example/1.json');
         $this->assertTrue($list[0]->value === '1');
@@ -84,9 +84,9 @@ class ComponentsTest extends BearFrameworkAddonTestCase
     {
         $app = $this->getApp();
 
-        $app->dataBundles->create('test2');
+        $app->dataBundle->create('test2');
         $this->setExpectedException('\IvoPetkov\BearFramework\Addons\DataBundle\AlreadyExistsException');
-        $app->dataBundles->create('test2');
+        $app->dataBundle->create('test2');
     }
 
     /**
@@ -100,15 +100,15 @@ class ComponentsTest extends BearFrameworkAddonTestCase
         $app->data->set($app->data->make('example/2a.json', '2'));
         $app->data->set($app->data->make('example/3a.json', '3'));
 
-        $app->dataBundles->create('test1a');
+        $app->dataBundle->create('test1a');
 
-        $app->dataBundles->addItems('test1a', [
+        $app->dataBundle->addItems('test1a', [
             'example/1a.json',
             'example/2a.json',
             'example/3a.json'
         ]);
 
-        $list = $app->dataBundles->getItemsList('test1a');
+        $list = $app->dataBundle->getItemsList('test1a');
         $this->assertTrue($list->length === 3);
         $this->assertTrue($list[0]->key === 'example/1a.json');
         $this->assertTrue($list[0]->value === '1');
@@ -120,7 +120,7 @@ class ComponentsTest extends BearFrameworkAddonTestCase
         $app->data->set($app->data->make('example/1a.json', '11'));
         $app->data->set($app->data->make('example/2a.json', '22'));
 
-        $list = $app->dataBundles->getItemsList('test1a');
+        $list = $app->dataBundle->getItemsList('test1a');
         $this->assertTrue($list->length === 3);
         $this->assertTrue($list[0]->key === 'example/1a.json');
         $this->assertTrue($list[0]->value === '1');
@@ -129,12 +129,12 @@ class ComponentsTest extends BearFrameworkAddonTestCase
         $this->assertTrue($list[2]->key === 'example/3a.json');
         $this->assertTrue($list[2]->value === '3');
 
-        $app->dataBundles->updateItems('test1a', [
+        $app->dataBundle->updateItems('test1a', [
             'example/1a.json',
             'example/2a.json'
         ]);
 
-        $list = $app->dataBundles->getItemsList('test1a');
+        $list = $app->dataBundle->getItemsList('test1a');
         $this->assertTrue($list->length === 3);
         $this->assertTrue($list[0]->key === 'example/1a.json');
         $this->assertTrue($list[0]->value === '11');
@@ -145,7 +145,7 @@ class ComponentsTest extends BearFrameworkAddonTestCase
 
         $app->data->delete('example/1a.json');
 
-        $list = $app->dataBundles->getItemsList('test1a');
+        $list = $app->dataBundle->getItemsList('test1a');
         $this->assertTrue($list->length === 3);
         $this->assertTrue($list[0]->key === 'example/1a.json');
         $this->assertTrue($list[0]->value === '11');
@@ -154,19 +154,19 @@ class ComponentsTest extends BearFrameworkAddonTestCase
         $this->assertTrue($list[2]->key === 'example/3a.json');
         $this->assertTrue($list[2]->value === '3');
 
-        $app->dataBundles->removeItems('test1a', [
+        $app->dataBundle->removeItems('test1a', [
             'example/2a.json',
             'example/3a.json'
         ]);
 
-        $list = $app->dataBundles->getItemsList('test1a');
+        $list = $app->dataBundle->getItemsList('test1a');
         $this->assertTrue($list->length === 1);
         $this->assertTrue($list[0]->key === 'example/1a.json');
         $this->assertTrue($list[0]->value === '11');
 
-        $app->dataBundles->updateItem('test1a', 'example/1a.json');
+        $app->dataBundle->updateItem('test1a', 'example/1a.json');
 
-        $list = $app->dataBundles->getItemsList('test1a');
+        $list = $app->dataBundle->getItemsList('test1a');
         $this->assertTrue($list->length === 0);
     }
 

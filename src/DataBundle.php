@@ -14,7 +14,7 @@ use BearFramework\App;
 /**
  * 
  */
-class DataBundles
+class DataBundle
 {
 
     public function create(string $id, array $itemKeys = [])
@@ -208,14 +208,14 @@ class DataBundles
     private function mapExists(string $id)
     {
         $app = App::get();
-        $mapKey = 'databundles/' . md5($id) . '.map';
+        $mapKey = 'databundle/' . md5($id) . '.map';
         return $app->data->exists($mapKey);
     }
 
     private function getMap(string $id)
     {
         $app = App::get();
-        $mapKey = 'databundles/' . md5($id) . '.map';
+        $mapKey = 'databundle/' . md5($id) . '.map';
         $value = $app->data->getValue($mapKey);
         if ($value === null) {
             return null;
@@ -226,7 +226,7 @@ class DataBundles
     private function setMap(string $id, array $data)
     {
         $app = App::get();
-        $mapKey = 'databundles/' . md5($id) . '.map';
+        $mapKey = 'databundle/' . md5($id) . '.map';
         $app->data->set($app->data->make($mapKey, gzcompress(json_encode($data))));
     }
 
@@ -243,7 +243,7 @@ class DataBundles
     private function getData(string $id)
     {
         $app = App::get();
-        $dataKey = 'databundles/' . md5($id) . '.data';
+        $dataKey = 'databundle/' . md5($id) . '.data';
         $value = $app->data->getValue($dataKey);
         if ($value === null) {
             return null;
@@ -254,7 +254,7 @@ class DataBundles
     private function setData(string $id, array $data)
     {
         $app = App::get();
-        $dataKey = 'databundles/' . md5($id) . '.data';
+        $dataKey = 'databundle/' . md5($id) . '.data';
         $app->data->set($app->data->make($dataKey, gzcompress(json_encode($data))));
     }
 
