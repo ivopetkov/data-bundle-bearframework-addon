@@ -17,6 +17,11 @@ use BearFramework\App;
 class DataBundle
 {
 
+    public function exists(string $id)
+    {
+        return $this->mapExists($id);
+    }
+
     public function create(string $id, array $itemKeys = [])
     {
         if ($this->mapExists($id)) {
