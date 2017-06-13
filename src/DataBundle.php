@@ -17,6 +17,13 @@ use BearFramework\App;
 class DataBundle
 {
 
+    private $prepareThreshold = 50;
+
+    public function setPrepareThreshold(int $value)
+    {
+        $this->prepareThreshold = $value;
+    }
+
     public function exists(string $id)
     {
         return $this->mapExists($id);
@@ -180,6 +187,7 @@ class DataBundle
                 $data['items'] = [];
             }
             $hasDataChange = false;
+            $counter = 0;
             foreach ($map['items'] as $itemKey => $itemVersion) {
                 if (!isset($data['items'][$itemKey]) || $data['items'][$itemKey][0] !== $itemVersion) {
                     $dataItem = $appData->get($itemKey);
@@ -189,6 +197,12 @@ class DataBundle
                         $data['items'][$itemKey] = [$itemVersion, 1, $dataItem->value, $dataItem->metadata->toArray()];
                     }
                     $hasDataChange = true;
+                    $counter++;
+                    if ($counter >= $this->prepareThreshold) {
+                        $this->setData($id, $data);
+                        $counter = 0;
+                        $hasDataChange = false;
+                    }
                 }
             }
             if ($hasDataChange) {
