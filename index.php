@@ -18,6 +18,6 @@ $context->classes
         ->add('\IvoPetkov\BearFramework\Addons\DataBundle\AlreadyExistsException', 'src/DataBundle/AlreadyExistsException.php')
         ->add('\IvoPetkov\BearFramework\Addons\DataBundle\NotFoundException', 'src/DataBundle/NotFoundException.php');
 
-$app->shortcuts->add('DataBundle', function() {
+$app->shortcuts->add('dataBundle', function() {
     return new DataBundle();
 });
