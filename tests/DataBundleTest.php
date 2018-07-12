@@ -10,7 +10,7 @@
 /**
  * @runTestsInSeparateProcesses
  */
-class ComponentsTest extends BearFrameworkAddonTestCase
+class ComponentsTest extends BearFramework\AddonTests\PHPUnitTestCase
 {
 
     /**
@@ -85,7 +85,7 @@ class ComponentsTest extends BearFrameworkAddonTestCase
         $app = $this->getApp();
 
         $app->dataBundle->create('test2');
-        $this->setExpectedException('\IvoPetkov\BearFramework\Addons\DataBundle\AlreadyExistsException');
+        $this->expectException('\IvoPetkov\BearFramework\Addons\DataBundle\AlreadyExistsException');
         $app->dataBundle->create('test2');
     }
 

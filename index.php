@@ -14,9 +14,9 @@ $app = App::get();
 $context = $app->context->get(__FILE__);
 
 $context->classes
-        ->add('IvoPetkov\BearFramework\Addons\DataBundle', 'src/DataBundle.php')
-        ->add('IvoPetkov\BearFramework\Addons\DataBundle\AlreadyExistsException', 'src/DataBundle/AlreadyExistsException.php')
-        ->add('IvoPetkov\BearFramework\Addons\DataBundle\NotFoundException', 'src/DataBundle/NotFoundException.php');
+        ->add('IvoPetkov\BearFramework\Addons\DataBundle', 'classes/DataBundle.php')
+        ->add('IvoPetkov\BearFramework\Addons\DataBundle\AlreadyExistsException', 'classes/DataBundle/AlreadyExistsException.php')
+        ->add('IvoPetkov\BearFramework\Addons\DataBundle\NotFoundException', 'classes/DataBundle/NotFoundException.php');
 
 $app->shortcuts->add('dataBundle', function() {
     return new DataBundle();
