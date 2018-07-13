@@ -251,12 +251,14 @@ class DataBundle
 
     private function lockMap(string $id)
     {
-        \IvoPetkov\Lock::acquire('databundle.map.' . md5($id));
+        $app = App::get();
+        $app->locks->acquire('databundle.map.' . md5($id));
     }
 
     private function unlockMap(string $id)
     {
-        \IvoPetkov\Lock::release('databundle.map.' . md5($id));
+        $app = App::get();
+        $app->locks->release('databundle.map.' . md5($id));
     }
 
     private function getData(string $id)
@@ -279,12 +281,14 @@ class DataBundle
 
     private function lockData(string $id)
     {
-        \IvoPetkov\Lock::acquire('databundle.data.' . md5($id));
+        $app = App::get();
+        $app->locks->acquire('databundle.data.' . md5($id));
     }
 
     private function unlockData(string $id)
     {
-        \IvoPetkov\Lock::release('databundle.data.' . md5($id));
+        $app = App::get();
+        $app->locks->release('databundle.data.' . md5($id));
     }
 
 }
