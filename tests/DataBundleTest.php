@@ -21,10 +21,10 @@ class ComponentsTest extends BearFramework\AddonTests\PHPUnitTestCase
         $app = $this->getApp();
 
         $list = $app->dataBundle->getItemsList('test1');
-        $this->assertTrue($list->length === 0);
+        $this->assertTrue($list->count() === 0);
 
         $item = $app->data->make('example/1.json', '1');
-        $item->metadata->meta1 = '11';
+        $item->metadata['meta1'] = '11';
         $app->data->set($item);
         $app->data->set($app->data->make('example/2.json', '2'));
         $app->data->set($app->data->make('example/3.json', '3'));
@@ -38,10 +38,10 @@ class ComponentsTest extends BearFramework\AddonTests\PHPUnitTestCase
         $app->dataBundle->addItem('test1', 'example/4.json');
 
         $list = $app->dataBundle->getItemsList('test1');
-        $this->assertTrue($list->length === 3);
+        $this->assertTrue($list->count() === 3);
         $this->assertTrue($list[0]->key === 'example/1.json');
         $this->assertTrue($list[0]->value === '1');
-        $this->assertTrue($list[0]->metadata->meta1 === '11');
+        $this->assertTrue($list[0]->metadata['meta1'] === '11');
         $this->assertTrue($list[1]->key === 'example/2.json');
         $this->assertTrue($list[1]->value === '2');
         $this->assertTrue($list[2]->key === 'example/3.json');
@@ -50,17 +50,17 @@ class ComponentsTest extends BearFramework\AddonTests\PHPUnitTestCase
         $app->data->set($app->data->make('example/2.json', '22'));
 
         $list = $app->dataBundle->getItemsList('test1');
-        $this->assertTrue($list->length === 3);
+        $this->assertTrue($list->count() === 3);
         $this->assertTrue($list[1]->key === 'example/2.json');
         $this->assertTrue($list[1]->value === '2');
 
         $app->dataBundle->updateItem('test1', 'example/2.json');
 
         $list = $app->dataBundle->getItemsList('test1');
-        $this->assertTrue($list->length === 3);
+        $this->assertTrue($list->count() === 3);
         $this->assertTrue($list[0]->key === 'example/1.json');
         $this->assertTrue($list[0]->value === '1');
-        $this->assertTrue($list[0]->metadata->meta1 === '11');
+        $this->assertTrue($list[0]->metadata['meta1'] === '11');
         $this->assertTrue($list[1]->key === 'example/2.json');
         $this->assertTrue($list[1]->value === '22');
         $this->assertTrue($list[2]->key === 'example/3.json');
@@ -69,10 +69,10 @@ class ComponentsTest extends BearFramework\AddonTests\PHPUnitTestCase
 
         $app->dataBundle->removeItem('test1', 'example/2.json');
         $list = $app->dataBundle->getItemsList('test1');
-        $this->assertTrue($list->length === 2);
+        $this->assertTrue($list->count() === 2);
         $this->assertTrue($list[0]->key === 'example/1.json');
         $this->assertTrue($list[0]->value === '1');
-        $this->assertTrue($list[0]->metadata->meta1 === '11');
+        $this->assertTrue($list[0]->metadata['meta1'] === '11');
         $this->assertTrue($list[1]->key === 'example/3.json');
         $this->assertTrue($list[1]->value === '3');
     }
@@ -109,7 +109,7 @@ class ComponentsTest extends BearFramework\AddonTests\PHPUnitTestCase
         ]);
 
         $list = $app->dataBundle->getItemsList('test1a');
-        $this->assertTrue($list->length === 3);
+        $this->assertTrue($list->count() === 3);
         $this->assertTrue($list[0]->key === 'example/1a.json');
         $this->assertTrue($list[0]->value === '1');
         $this->assertTrue($list[1]->key === 'example/2a.json');
@@ -121,7 +121,7 @@ class ComponentsTest extends BearFramework\AddonTests\PHPUnitTestCase
         $app->data->set($app->data->make('example/2a.json', '22'));
 
         $list = $app->dataBundle->getItemsList('test1a');
-        $this->assertTrue($list->length === 3);
+        $this->assertTrue($list->count() === 3);
         $this->assertTrue($list[0]->key === 'example/1a.json');
         $this->assertTrue($list[0]->value === '1');
         $this->assertTrue($list[1]->key === 'example/2a.json');
@@ -135,7 +135,7 @@ class ComponentsTest extends BearFramework\AddonTests\PHPUnitTestCase
         ]);
 
         $list = $app->dataBundle->getItemsList('test1a');
-        $this->assertTrue($list->length === 3);
+        $this->assertTrue($list->count() === 3);
         $this->assertTrue($list[0]->key === 'example/1a.json');
         $this->assertTrue($list[0]->value === '11');
         $this->assertTrue($list[1]->key === 'example/2a.json');
@@ -146,7 +146,7 @@ class ComponentsTest extends BearFramework\AddonTests\PHPUnitTestCase
         $app->data->delete('example/1a.json');
 
         $list = $app->dataBundle->getItemsList('test1a');
-        $this->assertTrue($list->length === 3);
+        $this->assertTrue($list->count() === 3);
         $this->assertTrue($list[0]->key === 'example/1a.json');
         $this->assertTrue($list[0]->value === '11');
         $this->assertTrue($list[1]->key === 'example/2a.json');
@@ -160,14 +160,14 @@ class ComponentsTest extends BearFramework\AddonTests\PHPUnitTestCase
         ]);
 
         $list = $app->dataBundle->getItemsList('test1a');
-        $this->assertTrue($list->length === 1);
+        $this->assertTrue($list->count() === 1);
         $this->assertTrue($list[0]->key === 'example/1a.json');
         $this->assertTrue($list[0]->value === '11');
 
         $app->dataBundle->updateItem('test1a', 'example/1a.json');
 
         $list = $app->dataBundle->getItemsList('test1a');
-        $this->assertTrue($list->length === 0);
+        $this->assertTrue($list->count() === 0);
     }
 
 }

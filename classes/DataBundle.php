@@ -160,7 +160,7 @@ class DataBundle
                     if ($itemData[1] === 1) {
                         $dataItem = $appData->make($itemKey, $itemData[2]);
                         foreach ($itemData[3] as $name => $value) {
-                            $dataItem->metadata->$name = $value;
+                            $dataItem->metadata[$name] = $value;
                         }
                         $list[] = $dataItem;
                     }
@@ -194,7 +194,7 @@ class DataBundle
                     if ($dataItem === null) {
                         $data['items'][$itemKey] = [$itemVersion, 2];
                     } else {
-                        $data['items'][$itemKey] = [$itemVersion, 1, $dataItem->value, $dataItem->metadata->toArray()];
+                        $data['items'][$itemKey] = [$itemVersion, 1, $dataItem->value, $dataItem->metadata];
                     }
                     $hasDataChange = true;
                     $counter++;
