@@ -194,7 +194,7 @@ class DataBundle
                     if ($dataItem === null) {
                         $data['items'][$itemKey] = [$itemVersion, 2];
                     } else {
-                        $data['items'][$itemKey] = [$itemVersion, 1, $dataItem->value, $dataItem->metadata];
+                        $data['items'][$itemKey] = [$itemVersion, 1, $dataItem->value, $dataItem->metadata->toArray()];
                     }
                     $hasDataChange = true;
                     $counter++;
