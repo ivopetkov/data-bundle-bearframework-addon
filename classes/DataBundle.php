@@ -151,7 +151,7 @@ class DataBundle
             if ($hasChange) {
                 $data = $prepareResult;
             }
-            return new \BearFramework\DataList(function() use ($map, $data) {
+            return new \BearFramework\DataList(function () use ($map, $data) {
                 $app = \BearFramework\App::get();
                 $appData = $app->data;
                 $list = [];
@@ -221,7 +221,6 @@ class DataBundle
 
     public function getStatus(string $id)
     {
-        
     }
 
     private function mapExists(string $id)
@@ -290,5 +289,4 @@ class DataBundle
         $app = App::get();
         $app->locks->release('databundle.data.' . md5($id));
     }
-
 }

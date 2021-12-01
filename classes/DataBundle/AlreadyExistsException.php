@@ -14,5 +14,4 @@ namespace IvoPetkov\BearFramework\Addons\DataBundle;
  */
 class AlreadyExistsException extends \Exception
 {
-    
 }
