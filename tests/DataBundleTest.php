@@ -10,7 +10,7 @@
 /**
  * @runTestsInSeparateProcesses
  */
-class ComponentsTest extends BearFramework\AddonTests\PHPUnitTestCase
+class DataBundleTest extends BearFramework\AddonTests\PHPUnitTestCase
 {
 
     /**
@@ -169,5 +169,4 @@ class ComponentsTest extends BearFramework\AddonTests\PHPUnitTestCase
         $list = $app->dataBundle->getItemsList('test1a');
         $this->assertTrue($list->count() === 0);
     }
-
 }
